@@ -3,36 +3,36 @@
 Today’s task was to take a mixed-type dataset (covid_toy.csv) and build a preprocessing pipeline using ColumnTransformer.
 Goal: handle missing values, encode categorical columns, and prepare the data for model training.
 
-🔧 Steps Completed
-1. Loaded the dataset
+What Was Done
 
-Target column: has_covid
+Loaded the dataset containing symptoms and basic information
 
-Features include numerical + categorical data
+Separated the target column (has_covid) from the features
 
-2. Performed Train-Test Split
-X_train, X_test, y_train, y_test = train_test_split(
-    df.drop(columns=['has_covid']), 
-    df['has_covid'], 
-    test_size=0.2
-)
+Split the data into training and testing parts
 
-3. Applied ColumnTransformer
+Applied three transformations in a single pipeline:
 
-Components used:
+Filled missing values in numerical data
 
-SimpleImputer → for numerical column: fever
+Converted ordered categories like Mild → Strong into numeric form
 
-OrdinalEncoder → for ordered category: cough (Mild < Strong)
+Applied one-hot encoding to non-ordered categorical columns such as gender and city
 
-OneHotEncoder → for nominal categories: gender, city (drop='first')
+Why This Matters
 
-remainder='passthrough' → keep untouched columns
+Machine learning algorithms don’t understand raw text or missing values.
+This step ensures:
 
-4. Output Shapes
+Consistent preprocessing
 
-transformer.fit_transform(X_train).shape
+Clean numeric features
 
-transformer.transform(X_test).shape
+A ready-to-train dataset for the next stage
 
-Shows the final encoded feature space.
+Less manual work and fewer errors
+
+Output
+
+After the transformations, both the training and test sets were successfully converted into their final numeric form.
+The feature shapes confirmed that the pipeline worked exactly as intended.
